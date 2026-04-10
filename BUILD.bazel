@@ -1,0 +1,28 @@
+"""sonic-utilities Python wheel — migrated from rules/sonic-utilities.mk."""
+
+load("//rules/bazel/wheel:wheel.bzl", "sonic_wheel")
+
+package(default_visibility = ["//visibility:public"])
+
+sonic_wheel(
+    name = "sonic_utilities_wheel",
+    distribution = "sonic-utilities",
+    version = "1.2",
+    deps = [
+        "//src/sonic-platform-common:sonic_platform_common_wheel",
+        "//src/sonic-py-swsssdk:swsssdk_wheel",
+    ],
+    summary = "SONiC command-line utilities for configuration and troubleshooting.",
+    visibility = ["//visibility:public"],
+)
+
+# sonic-utilities-data deb (rules/sonic-utilities-data.mk)
+# Contains bash/zsh completions and data files
+filegroup(
+    name = "sonic_utilities_data",
+    srcs = glob(
+        ["sonic-utilities-data/**"],
+        allow_empty = True,
+    ),
+    visibility = ["//visibility:public"],
+)
